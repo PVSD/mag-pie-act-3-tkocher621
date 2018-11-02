@@ -30,18 +30,38 @@ public class Magpie3
 	public String getResponse(String statement)
 	{
 		String response = "";
-		if (statement.length() == 0)
-		{
-			response = "Say something, please.";
-		}
-		else if (findKeyword(statement, "no") >= 0)
+		if (statement.indexOf("no") >= 0)
 		{
 			response = "Why so negative?";
 		}
-		else if (findKeyword(statement, "mother") >= 0
-				|| findKeyword(statement, "father") >= 0
-				|| findKeyword(statement, "sister") >= 0
-				|| findKeyword(statement, "brother") >= 0)
+		else if ((findKeyword(statement, "dog", 0) != -1) || (findKeyword(statement, "cat", 0) != -1))
+		{
+			response = "Tell me more about your pets.";
+		}
+		else if (findKeyword(statement, "mr. pennybacker", 0) != -1)
+		{
+			response = "He sounds like a good teacher.";
+		}
+		else if (statement.trim().length() <= 0)
+		{
+			response = "Say something, please.";
+		}
+		else if (findKeyword(statement, "todd", 0) != -1)
+		{
+			response = "He sounds like a cool guy.";
+		}
+		else if (findKeyword(statement, "party", 0) != -1)
+		{
+			response = "I go to parties too.";
+		}
+		else if (findKeyword(statement, "egg", 0) != -1)
+		{
+			response = "Eggs fill me with unexplainable excitement.";
+		}
+		else if (statement.indexOf("mother") >= 0
+				|| statement.indexOf("father") >= 0
+				|| statement.indexOf("sister") >= 0
+				|| statement.indexOf("brother") >= 0)
 		{
 			response = "Tell me more about your family.";
 		}
@@ -68,7 +88,7 @@ public class Magpie3
 	 * @return the index of the first occurrence of goal in
 	 *         statement or -1 if it's not found
 	 */
-	private int findKeyword(String statement, String goal,
+	public int findKeyword(String statement, String goal,
 			int startPos)
 	{
 		String phrase = statement.trim().toLowerCase();
@@ -85,6 +105,9 @@ public class Magpie3
 			// Find the string of length 1 before and after
 			// the word
 			String before = " ", after = " ";
+
+			System.out.print("PSN: " + psn + " | ");
+
 			if (psn > 0)
 			{
 				before = phrase.substring(psn - 1, psn);
@@ -109,6 +132,10 @@ public class Magpie3
 
 			// The last position didn't work, so let's find
 			// the next, if there is one.
+
+			System.out.print("BEFORE: " + "\"" + before + "\" | ");
+			System.out.println("AFTER: " + "\"" + after + "\"");
+
 			psn = phrase.indexOf(goal, psn + 1);
 
 		}
