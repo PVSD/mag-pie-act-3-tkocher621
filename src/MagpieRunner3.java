@@ -14,6 +14,8 @@ public class MagpieRunner3
 	public static void main(String[] args)
 	{
 		Magpie3 maggie = new Magpie3();
+
+		maggie.findKeyword("today is today and yesterday is tomorrows today, but yesterday was a great day.", "day", 0);
 		
 		System.out.println (maggie.getGreeting());
 		Scanner in = new Scanner (System.in);
